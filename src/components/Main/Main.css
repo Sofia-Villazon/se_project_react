@@ -1,0 +1,30 @@
+.cards {
+  margin-top: 40px;
+}
+
+.cards__text {
+  margin: 0;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  line-height: 100%;
+}
+
+.cards__list {
+  padding: 0;
+  padding-bottom: 171px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  gap: 20px;
+  margin-top: 34px;
+}
+
+@media screen and (max-width: 630px) {
+  .cards {
+    margin-top: 32px;
+  }
+
+  .cards__list {
+    padding-bottom: 147px;
+  }
+}

@@ -1,0 +1,146 @@
+.header {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  max-height: 40px;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  line-height: 24px;
+  font-size: 20px;
+  position: relative;
+}
+
+.header__menu-btn {
+  position: absolute;
+  right: -50px;
+}
+
+.header__logo {
+  max-width: 89px;
+  max-height: 100%;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 100%;
+  margin: 0;
+}
+
+.header__date-location {
+  font-weight: 700;
+  font-size: 20px;
+  padding: 11px 0 5px;
+  margin: 0 auto 0 24px;
+}
+
+.header__menu {
+  display: flex;
+}
+
+.header__menu_mobile__close-btn_hidden {
+  visibility: hidden;
+}
+
+.header__button {
+  max-width: 116px;
+  max-height: 100%;
+  padding: 8px 0 7px;
+  border: none;
+  font-weight: 700;
+}
+
+.header__button:hover {
+  cursor: pointer;
+}
+
+.header__user-container {
+  display: flex;
+  gap: 12px;
+  max-height: 100%;
+  margin-left: 20px;
+  justify-content: center;
+}
+.header__user-name {
+  padding: 8px 0 7px;
+  margin: 0;
+}
+
+.header__avatar {
+  width: 40px;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+@media screen and (max-width: 630px) {
+  .header {
+    flex-direction: column;
+    max-height: 116px;
+  }
+
+  .header__menu-btn {
+    position: absolute;
+    background: center / cover url(../../assets/menu-btn.svg);
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    right: 0;
+  }
+
+  .header__date-location {
+    margin: 32px 0 16px;
+    padding: 0;
+  }
+
+  .header__menu {
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header__user-container {
+    width: fit-content;
+    margin: 60px auto 24px;
+    max-height: 40px;
+  }
+
+  .header__button {
+    margin: 0 auto 60px;
+    background-color: transparent;
+  }
+
+  .header__menu_mobile {
+    visibility: visible;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background-color: #ffffff;
+    width: 343px;
+    width: 100%;
+    height: 208px;
+    z-index: 25;
+    border-radius: 10px;
+  }
+
+  .header__menu_mobile__close-btn {
+    visibility: visible;
+    padding: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 11px;
+    right: 11px;
+    border: none;
+    background: center / contain no-repeat rgb(0, 0, 0, 0)
+      url(../../assets/close-btn.svg);
+  }
+
+  .header__menu_mobile__close-btn_hidden {
+    visibility: hidden;
+  }
+
+  .header__user-name {
+    width: fit-content;
+  }
+}

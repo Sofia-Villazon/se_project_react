@@ -1,0 +1,46 @@
+@import "../ModalWithForm/ModalWithForm.css";
+
+.modal__container_preview {
+  max-width: 498px;
+  max-height: 610px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal__close_preview {
+  top: 24px;
+}
+
+.modal__image {
+  width: 100%;
+}
+
+.modal__footer {
+  padding: 20px 0 32px 32px;
+  font-family: "Cabinet Grotesk";
+}
+
+.modal__caption {
+  margin: 0;
+  margin-bottom: 12px;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.modal__weather {
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 630px) {
+  .modal__container_preview {
+    max-width: 343px;
+    max-height: 463px;
+  }
+
+  .modal__close_preview {
+    top: 12px;
+    left: 309px;
+  }
+}

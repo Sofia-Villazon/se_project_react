@@ -1,0 +1,40 @@
+.item-card {
+  margin: 0;
+  padding: 0;
+  border-radius: 19px;
+  position: relative;
+  overflow: hidden;
+  max-width: 325px;
+  max-height: 328px;
+  display: flex;
+  justify-content: center;
+}
+
+.item-card__name {
+  margin: 0 auto;
+  padding: 2px 12px;
+  position: absolute;
+  top: 15px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  line-height: 20px;
+  color: #00000099;
+}
+
+.item-card__image {
+  height: 100%;
+}
+
+@media screen and (max-width: 630px) {
+  .item-card {
+    max-width: 164px;
+    max-height: 164px;
+  }
+
+  .item-card__name {
+    /* left: 45px; */
+    top: 7px;
+  }
+}

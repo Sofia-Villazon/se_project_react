@@ -10,5 +10,12 @@ The idea of the application is pretty simple - we make a call to an API, which t
 
 ## Deployed Link
 
--(https://sofia-villazon.github.io/se_project_react/)
+- The backend API for this project can be found here: 
+[WTWR Backend API](https://sofia-villazon.github.io/se_project_react/)
+
+## Features
+- Weather-based clothing recommendations
+- Responsive design for mobile and desktop screen sizes
+- Modal functionality for adding garments
+- Temperature-based clothing filtering
 

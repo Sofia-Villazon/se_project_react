@@ -56,7 +56,6 @@
   margin: 0;
   font-family: "Cabinet Grotesk";
   font-weight: 700;
-  font-style: Bold;
   font-size: 16px;
   line-height: 20px;
 }
@@ -81,6 +80,7 @@
 .modal__label {
   font-family: "Cabinet Grotesk";
   font-size: 16px;
+  border-bottom: 1px solid black;
 }
 
 .modal__label_radio {
@@ -91,10 +91,26 @@
   display: block;
   margin: 8px 0 0;
   width: 100%;
-  border-radius: 8px;
-  border: 1px solid #21212166;
+  border: none;
   font-size: 20px;
   opacity: 40%;
+}
+
+.modal__input:focus-visible {
+  outline: none;
+  border: none;
+}
+
+.modal__label:has(.modal__input_type_error) {
+  color: #ff4d00;
+}
+
+.modal__input_type_error {
+  color: #ff4d00;
+}
+
+.modal__error {
+  color: #ff4d00;
 }
 
 .modal__radio-input {

@@ -15,7 +15,7 @@ function WeatherCard({ temperature, weatherData }) {
       ? "sunny"
       : "cloudy";
 
-  const cardImageFilterTime = weatherData.isDay ? "D" : "N";
+  const cardImageFilterTime = weatherData.dayNight ? "D" : "N";
   const selectedCard = `${cardImageFilter}${cardImageFilterTime}`;
 
   return (
@@ -26,7 +26,7 @@ function WeatherCard({ temperature, weatherData }) {
           src={
             weatherCard[weatherData.dayNight ? "day" : "night"][selectedCard]
           }
-          alt="cloudy"
+          alt={selectedCard}
           className="weather-card__image"
         />
       </section>

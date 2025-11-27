@@ -52,11 +52,7 @@ function Header({
           </button>
           <div className="header__user-container">
             <p className="header__user-name">{user.name}</p>
-            <img
-              src={user.avatar}
-              alt="avatar image"
-              className="header__avatar"
-            />
+            <img src={user.avatar} alt={user.name} className="header__avatar" />
           </div>
         </div>
       </header>

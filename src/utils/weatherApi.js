@@ -5,9 +5,9 @@ const handleServerResponse = (res) => {
   return Promise.reject(`Error: ${res.status}`);
 };
 
-const getWeather = ({ cordinates, APIkey }) => {
+const getWeather = ({ coordinates, apiKey }) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${cordinates.latitude}&lon=${cordinates.longitude}&units=imperial&appid=${APIkey}`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&units=imperial&appid=${apiKey}`
   ).then(handleServerResponse);
 };
 
@@ -15,7 +15,8 @@ const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
   result.temp = { F: data.main.temp };
-  result.type = result.temp >= 86 ? "hot" : result.temp >= 60 ? "warm" : "cold";
+  result.type =
+    result.temp.F >= 86 ? "hot" : result.temp.F >= 60 ? "warm" : "cold";
   result.condition = data.weather[0].id;
   result.dayNight = isDay(data.sys);
   return result;
@@ -23,6 +24,6 @@ const filterWeatherData = (data) => {
 
 const isDay = ({ sunrise, sunset }) => {
   const now = Date.now();
-  return sunrise * 1000 > now && now < sunset * 1000;
+  return sunrise * 1000 <= now && now < sunset * 1000;
 };
 export { filterWeatherData, getWeather };

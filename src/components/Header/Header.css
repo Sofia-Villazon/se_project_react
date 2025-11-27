@@ -132,7 +132,7 @@
     top: 11px;
     right: 11px;
     border: none;
-    background: center / contain no-repeat rgb(0, 0, 0, 0)
+    background: center / contain no-repeat rgba(0, 0, 0, 0)
       url(../../assets/close-btn.svg);
   }
 

@@ -1,5 +1,4 @@
 import "./ModalWithForm.css";
-import { useEffect } from "react";
 
 function ModalWithForm({
   children,
@@ -7,14 +6,11 @@ function ModalWithForm({
   titleText,
   activeModal,
   closeActiveModal,
+  isOpen,
 }) {
   return (
     <>
-      <section
-        className={`modal ${
-          activeModal === "add-garment" ? "modal_is-opened" : ""
-        }`}
-      >
+      <section className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
         <div className="modal__container">
           <button
             type="button"

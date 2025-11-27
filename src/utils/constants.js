@@ -125,9 +125,9 @@ const settings = {
   errorClass: "modal__error_visible",
 };
 
-const cordinates = { latitude: 45.551011, longitude: -73.445352 };
+const coordinates = { latitude: 45.551011, longitude: -73.445352 };
 
-const APIkey = "469e7a9ae948d74c69476a9bb8594742";
+const apiKey = "469e7a9ae948d74c69476a9bb8594742";
 
 const weatherCard = {
   day: { cloudyD, rainD, snowD, sunnyD, fogD, stormD },
@@ -136,8 +136,8 @@ const weatherCard = {
 
 export {
   weatherCard,
-  APIkey,
-  cordinates,
+  apiKey,
+  coordinates,
   defaultClothingItems,
   user,
   settings,

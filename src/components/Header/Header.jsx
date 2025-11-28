@@ -15,48 +15,46 @@ function Header({
   });
 
   return (
-    <>
-      <header className="header">
+    <header className="header">
+      <button
+        className="header__menu-btn"
+        type="button"
+        onClick={handleMenuClick}
+      ></button>
+
+      <img src={logo} alt="wtwr logo" className="header__logo" />
+      <p className="header__date-location">
+        {currentDate}, {weatherData.city}
+      </p>
+
+      <div
+        className={
+          activeModal === "menu" ? "header__menu_mobile" : "header__menu"
+        }
+      >
         <button
-          className="header__menu-btn"
           type="button"
-          onClick={handleMenuClick}
+          className={
+            activeModal === "menu"
+              ? "header__menu_mobile__close-btn"
+              : "header__menu_mobile__close-btn_hidden"
+          }
+          onClick={closeActiveModal}
         ></button>
 
-        <img src={logo} alt="wtwr logo" className="header__logo" />
-        <p className="header__date-location">
-          {currentDate}, {weatherData.city}
-        </p>
-
-        <div
-          className={
-            activeModal === "menu" ? "header__menu_mobile" : "header__menu"
-          }
+        <button
+          onClick={handleAddClick}
+          className="header__button"
+          type="button"
         >
-          <button
-            type="button"
-            className={
-              activeModal === "menu"
-                ? "header__menu_mobile__close-btn"
-                : "header__menu_mobile__close-btn_hidden"
-            }
-            onClick={closeActiveModal}
-          ></button>
-
-          <button
-            onClick={handleAddClick}
-            className="header__button"
-            type="button"
-          >
-            + Add clothes
-          </button>
-          <div className="header__user-container">
-            <p className="header__user-name">{user.name}</p>
-            <img src={user.avatar} alt={user.name} className="header__avatar" />
-          </div>
+          + Add clothes
+        </button>
+        <div className="header__user-container">
+          <p className="header__user-name">{user.name}</p>
+          <img src={user.avatar} alt={user.name} className="header__avatar" />
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
 export default Header;

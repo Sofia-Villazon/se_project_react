@@ -43,10 +43,25 @@ function App() {
   };
 
   useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (evt) => {
+      if (evt.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
+  useEffect(() => {
     const submitBtn = document.querySelector(".modal__submit-btn");
     disableBtnElement(submitBtn, settings);
     enableValidation(settings);
-    console.log(activeModal);
 
     getWeather({ coordinates, apiKey })
       .then((data) => {

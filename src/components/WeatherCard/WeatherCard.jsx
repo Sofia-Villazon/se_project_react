@@ -19,18 +19,14 @@ function WeatherCard({ temperature, weatherData }) {
   const selectedCard = `${cardImageFilter}${cardImageFilterTime}`;
 
   return (
-    <>
-      <section className="weather-card__container">
-        <p className="weather-card__temperature">{temperature}°F</p>
-        <img
-          src={
-            weatherCard[weatherData.dayNight ? "day" : "night"][selectedCard]
-          }
-          alt={selectedCard}
-          className="weather-card__image"
-        />
-      </section>
-    </>
+    <section className="weather-card__container">
+      <p className="weather-card__temperature">{temperature}°F</p>
+      <img
+        src={weatherCard[weatherData.dayNight ? "day" : "night"][selectedCard]}
+        alt={selectedCard}
+        className="weather-card__image"
+      />
+    </section>
   );
 }
 

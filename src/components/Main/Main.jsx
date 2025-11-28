@@ -16,17 +16,15 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
       );
     });
   return (
-    <>
-      <main>
-        <WeatherCard temperature={temperature} weatherData={weatherData} />
-        <section className="cards">
-          <p className="cards__text">
-            Today is {temperature}° F / You may want to wear:
-          </p>
-          <ul className="cards__list">{filteredCards}</ul>
-        </section>
-      </main>
-    </>
+    <main>
+      <WeatherCard temperature={temperature} weatherData={weatherData} />
+      <section className="cards">
+        <p className="cards__text">
+          Today is {temperature}° F / You may want to wear:
+        </p>
+        <ul className="cards__list">{filteredCards}</ul>
+      </section>
+    </main>
   );
 }
 

@@ -2,17 +2,13 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { settings, coordinates, apiKey } from "../../utils/constants.js";
-import {
-  enableValidation,
-  disableBtnElement,
-  resetValidation,
-} from "../../validation.js";
+import { enableValidation, disableBtnElement } from "../../validation.js";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi.js";
-import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext.js";
+import { CurrentTemperatureUnitContext } from "../../hooks/contexts/CurrentTemperatureUnitContext.js";
 import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 

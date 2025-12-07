@@ -1,6 +1,6 @@
 import "./WeatherCard.css";
 import { weatherCard } from "../../utils/constants";
-import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../../hooks/contexts/CurrentTemperatureUnitContext";
 import { useContext } from "react";
 
 function WeatherCard({ temperature, weatherData }) {
@@ -21,7 +21,6 @@ function WeatherCard({ temperature, weatherData }) {
 
   const cardImageFilterTime = weatherData.dayNight ? "D" : "N";
   const selectedCard = `${cardImageFilter}${cardImageFilterTime}`;
-
   return (
     <section className="weather-card__container">
       <p className="weather-card__temperature">

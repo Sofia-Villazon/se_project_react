@@ -1,8 +1,8 @@
 import ItemCard from "../ItemCard/ItemCard";
 
-import "./ClothesSelection.css";
+import "./ClothesSection.css";
 
-function ClothesSelection({ clothingItems, handleCardClick, handleAddClick }) {
+function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
   const clothingCards = clothingItems.map((item) => {
     return (
       <ItemCard key={item._id} item={item} onCardClick={handleCardClick} />
@@ -23,4 +23,4 @@ function ClothesSelection({ clothingItems, handleCardClick, handleAddClick }) {
     </div>
   );
 }
-export default ClothesSelection;
+export default ClothesSection;

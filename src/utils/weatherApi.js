@@ -1,9 +1,4 @@
-const handleServerResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-};
+import { handleServerResponse } from "./constants";
 
 const getWeather = ({ coordinates, apiKey }) => {
   return fetch(
@@ -14,7 +9,10 @@ const getWeather = ({ coordinates, apiKey }) => {
 const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
-  result.temp = { F: data.main.temp };
+  result.temp = {
+    F: data.main.temp,
+    C: Math.round(((data.main.temp - 32) * 5) / 9),
+  };
   result.type =
     result.temp.F >= 86 ? "hot" : result.temp.F >= 60 ? "warm" : "cold";
   result.condition = data.weather[0].id;

@@ -1,10 +1,14 @@
+import { useContext } from "react";
+
 import ItemCard from "../ItemCard/ItemCard";
 import WeatherCard from "../WeatherCard/WeatherCard";
+import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 
 import "./Main.css";
 
 function Main({ weatherData, handleCardClick, clothingItems }) {
-  const temperature = weatherData.temp.F;
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const temperature = weatherData.temp[`${currentTemperatureUnit}`];
 
   const filteredCards = clothingItems
     .filter((item) => {
@@ -20,7 +24,8 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
       <WeatherCard temperature={temperature} weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {temperature}° F / You may want to wear:
+          Today is {temperature}° {currentTemperatureUnit} / You may want to
+          wear:
         </p>
         <ul className="cards__list">{filteredCards}</ul>
       </section>

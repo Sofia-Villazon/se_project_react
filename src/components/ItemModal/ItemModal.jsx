@@ -1,7 +1,10 @@
+import "../ModalWithForm/ModalWithForm.css";
 import "./ItemModal.css";
-// import "../ModalWithForm/ModalWithForm.css";
 
-function ItemModal({ card, activeModal, closeActiveModal }) {
+function ItemModal({ card, activeModal, closeActiveModal, deleteHandler }) {
+  const handlerDeleteCard = () => {
+    deleteHandler(card._id);
+  };
   return (
     <section
       className={`modal ${activeModal === "preview" ? "modal_is-opened" : ""}`}
@@ -12,10 +15,17 @@ function ItemModal({ card, activeModal, closeActiveModal }) {
           className="modal__close-btn modal__close_preview"
           onClick={closeActiveModal}
         ></button>
-        <img src={card.link} alt={card.name} className="modal__image" />
+        <img src={card.imageUrl} alt={card.name} className="modal__image" />
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
+          <button
+            type="button"
+            className="modal__delete-btn"
+            onClick={handlerDeleteCard}
+          >
+            Delete Item
+          </button>
         </div>
       </div>
     </section>

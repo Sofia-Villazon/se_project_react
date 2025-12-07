@@ -4,7 +4,7 @@ function ModalWithForm({
   children,
   buttonText,
   titleText,
-  activeModal,
+  onSubmit,
   closeActiveModal,
   isOpen,
 }) {
@@ -17,7 +17,7 @@ function ModalWithForm({
           onClick={closeActiveModal}
         />
         <h2 className="modal__title">{titleText}</h2>
-        <form className="modal__form" noValidate>
+        <form className="modal__form" noValidate onSubmit={onSubmit}>
           {children}
           <button type="submit" className="modal__submit-btn">
             {buttonText}

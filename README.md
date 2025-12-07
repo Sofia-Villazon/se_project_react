@@ -13,6 +13,10 @@ The idea of the application is pretty simple - we make a call to an API, which t
 - The backend API for this project can be found here: 
 [WTWR Backend API](https://sofia-villazon.github.io/se_project_react/)
 
+## Video about my project
+
+- [About Project 11](https://drive.google.com/file/d/1mzrL7Cf9-Byj4xhx_o4PJintUQEUxt6j/view?usp=sharing)
+
 ## Features
 - Weather-based clothing recommendations
 - Responsive design for mobile and desktop screen sizes

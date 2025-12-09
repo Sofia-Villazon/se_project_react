@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { settings, coordinates, apiKey } from "../../utils/constants.js";
-import { enableValidation, disableBtnElement } from "../../validation.js";
+import { coordinates, apiKey } from "../../utils/constants.js";
+
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -30,7 +30,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
-  const handleSwitchChange = () => {
+  const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
@@ -87,10 +87,6 @@ function App() {
   }, [activeModal]);
 
   useEffect(() => {
-    const submitBtn = document.querySelector(".modal__submit-btn");
-    disableBtnElement(submitBtn, settings);
-    enableValidation(settings);
-
     getWeather({ coordinates, apiKey })
       .then((data) => {
         const filteredData = filterWeatherData(data);
@@ -107,7 +103,7 @@ function App() {
 
   return (
     <CurrentTemperatureUnitContext.Provider
-      value={{ currentTemperatureUnit, handleSwitchChange }}
+      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
       <div className="page">
         <div className="page__content">

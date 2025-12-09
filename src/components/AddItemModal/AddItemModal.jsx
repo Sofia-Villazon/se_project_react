@@ -2,32 +2,28 @@ import "./AddItemModal.css";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
-import { disableBtnElement } from "../../validation";
-import { settings } from "../../utils/constants.js";
+import { settings, defaultValues } from "../../utils/constants.js";
 
 function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
-  const defaultValues = { name: "", imageUrl: "", weather: "" };
-  const { values, setValues, handleChange } = useForm(defaultValues);
-
-  const inputs = Array.from(
-    document.querySelectorAll(".modal__input, .modal__radio-input")
-  );
+  const {
+    values,
+    setValues,
+    handleImage,
+    error,
+    handleName,
+    handleRadioBtn,
+    isChecked,
+    isDisabled,
+    setIsDisabled,
+  } = useForm();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onAddItem(values);
-    setValues(defaultValues);
-    const fieldset = document.querySelector(".modal__fieldset");
-    const radioInputArray = fieldset.querySelectorAll(".modal__radio-input");
-    radioInputArray.forEach((item) => {
-      item.checked = false;
-    });
-    const btnElement = evt.target.querySelector(".modal__submit-btn");
-    disableBtnElement(btnElement, settings);
-
-    inputs.forEach((item) => console.log(item.validity.valid));
+    if (error === defaultValues) {
+      onAddItem(values);
+      setValues(defaultValues);
+    }
   };
-
   return (
     <>
       <ModalWithForm
@@ -36,10 +32,14 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
         closeActiveModal={closeActiveModal}
         isOpen={isOpen}
         onSubmit={handleSubmit}
+        error={error}
+        isDisabled={isDisabled}
       >
         <label htmlFor="garment-name-input" className="modal__label">
           Name
-          <span className="modal__error" id="garment-name-input-error"></span>
+          <span className="modal__error" id="garment-name-input-error">
+            {error.name}
+          </span>
           <input
             id="garment-name-input"
             name="name"
@@ -50,12 +50,14 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
             minLength="2"
             maxLength="40"
             value={values.name}
-            onChange={handleChange}
+            onChange={handleName}
           />
         </label>
         <label htmlFor="garment-image-input" className="modal__label">
           Image
-          <span className="modal__error" id="garment-image-input-error"></span>
+          <span className="modal__error" id="garment-image-input-error">
+            {error.imageUrl}
+          </span>
           <input
             id="garment-image-input"
             name="imageUrl"
@@ -64,11 +66,14 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
             placeholder="Image URL"
             required
             value={values.imageUrl}
-            onChange={handleChange}
+            onChange={handleImage}
           />
         </label>
         <fieldset className="modal__fieldset">
           <legend className="modal__legend">Select the weather type:</legend>
+          <span className="modal__error" id="garment-name-input-error">
+            {error.weather}
+          </span>
 
           <div className="modal__radio-btn">
             <input
@@ -78,7 +83,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
               name="weather"
               required
               value="hot"
-              onChange={handleChange}
+              onChange={handleRadioBtn}
+              checked={isChecked.hot}
             />
             <label htmlFor="type-hot-input" className="modal__label_radio">
               Hot
@@ -93,7 +99,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
               name="weather"
               required
               value="warm"
-              onChange={handleChange}
+              onChange={handleRadioBtn}
+              checked={isChecked.warm}
             />
             <label htmlFor="type-warm-input" className="modal__label_radio">
               Warm
@@ -108,7 +115,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
               name="weather"
               required
               value="cold"
-              onChange={handleChange}
+              onChange={handleRadioBtn}
+              checked={isChecked.cold}
             />
             <label htmlFor="type-cold-input" className="modal__label_radio">
               Cold

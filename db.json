@@ -91,18 +91,6 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
     },
     {
-      "name": "Boots",
-      "imageUrl": "https://assets.manufactum.de/p/208/208470/208470_01.jpg/ladies-leather-boots.jpg?profile=pdsmain_1000",
-      "weather": "cold",
-      "_id": 22
-    },
-    {
-      "name": "jacket",
-      "imageUrl": "https://assets.manufactum.de/p/208/208470/208470_01.jpg/ladies-leather-boots.jpg?profile=pdsmain_1000",
-      "weather": "warm",
-      "_id": 31
-    },
-    {
       "name": "jacket",
       "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
       "weather": "",
@@ -239,6 +227,60 @@
       "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
       "weather": "cold",
       "_id": 55
+    },
+    {
+      "name": "sssss",
+      "imageUrl": "https://assets.manufactum.de/p/208/208470/208470_01.jpg/ladies-leather-boots.jpg?profile=pdsmain_1000",
+      "weather": "hot",
+      "_id": 57
+    },
+    {
+      "name": "dc",
+      "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
+      "weather": "cold",
+      "_id": 58
+    },
+    {
+      "name": "dc",
+      "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
+      "weather": "cold",
+      "_id": 59
+    },
+    {
+      "name": "sasasa",
+      "imageUrl": "https://assets.manufactum.de/p/208/208470/208470_01.jpg/ladies-leather-boots.jpg?profile=pdsmain_1000",
+      "weather": "",
+      "_id": 60
+    },
+    {
+      "name": "jacket",
+      "imageUrl": "https://assets.manufactum.de/p/208/208470/208470_01.jpg/ladies-leather-boots.jpg?profile=pdsmain_1000",
+      "weather": "",
+      "_id": 61
+    },
+    {
+      "name": "jacket",
+      "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
+      "weather": "",
+      "_id": 62
+    },
+    {
+      "name": "jacket",
+      "imageUrl": "https://assets.manufactum.de/p/208/208470/208470_01.jpg/ladies-leather-boots.jpg?profile=pdsmain_1000",
+      "weather": "warm",
+      "_id": 66
+    },
+    {
+      "name": "jacket",
+      "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
+      "weather": "warm",
+      "_id": 73
+    },
+    {
+      "name": "fa",
+      "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
+      "weather": "hot",
+      "_id": 74
     }
   ]
 }

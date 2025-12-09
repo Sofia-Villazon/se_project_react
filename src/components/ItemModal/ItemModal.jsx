@@ -2,7 +2,7 @@ import "../ModalWithForm/ModalWithForm.css";
 import "./ItemModal.css";
 
 function ItemModal({ card, activeModal, closeActiveModal, deleteHandler }) {
-  const handlerDeleteCard = () => {
+  const deleteCardHandler = () => {
     deleteHandler(card._id);
   };
   return (
@@ -22,7 +22,7 @@ function ItemModal({ card, activeModal, closeActiveModal, deleteHandler }) {
           <button
             type="button"
             className="modal__delete-btn"
-            onClick={handlerDeleteCard}
+            onClick={deleteCardHandler}
           >
             Delete Item
           </button>

@@ -17,15 +17,12 @@ const user = {
   avatar,
 };
 
-const settings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__submit-btn",
-  inactiveButtonClass: "modal__submit-btn_inactive",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
+const defaultValues = { name: "", imageUrl: "", weather: "" };
+const defaultInputCheck = {
+  hot: false,
+  warm: false,
+  cold: false,
 };
-
 const coordinates = { latitude: 45.551011, longitude: -73.445352 };
 
 const apiKey = "469e7a9ae948d74c69476a9bb8594742";
@@ -46,4 +43,6 @@ export {
   user,
   settings,
   handleServerResponse,
+  defaultValues,
+  defaultInputCheck,
 };

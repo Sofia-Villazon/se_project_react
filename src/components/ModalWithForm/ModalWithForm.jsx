@@ -1,4 +1,6 @@
+import { defaultInputCheck } from "../../utils/constants";
 import "./ModalWithForm.css";
+import useForm from "../../hooks/useForm";
 
 function ModalWithForm({
   children,
@@ -7,7 +9,13 @@ function ModalWithForm({
   onSubmit,
   closeActiveModal,
   isOpen,
+  isDisabled,
 }) {
+  const { setIsChecked, isChecked, values } = useForm();
+  const uncheckCheckbox = () => {
+    setIsChecked(defaultInputCheck);
+  };
+
   return (
     <section className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
       <div className="modal__container">
@@ -17,9 +25,14 @@ function ModalWithForm({
           onClick={closeActiveModal}
         />
         <h2 className="modal__title">{titleText}</h2>
-        <form className="modal__form" noValidate onSubmit={onSubmit}>
+        <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          <button type="submit" className="modal__submit-btn">
+          <button
+            type="submit"
+            className="modal__submit-btn"
+            disabled={isDisabled}
+            onClick={uncheckCheckbox}
+          >
             {buttonText}
           </button>
         </form>

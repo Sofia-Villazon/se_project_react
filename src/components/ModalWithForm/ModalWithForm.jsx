@@ -10,6 +10,7 @@ function ModalWithForm({
   closeActiveModal,
   isOpen,
   isDisabled,
+  formHandleChange,
 }) {
   const { setIsChecked, isChecked, values } = useForm();
   const uncheckCheckbox = () => {
@@ -25,7 +26,11 @@ function ModalWithForm({
           onClick={closeActiveModal}
         />
         <h2 className="modal__title">{titleText}</h2>
-        <form className="modal__form" onSubmit={onSubmit}>
+        <form
+          className="modal__form"
+          onSubmit={onSubmit}
+          onChange={formHandleChange}
+        >
           {children}
           <button
             type="submit"

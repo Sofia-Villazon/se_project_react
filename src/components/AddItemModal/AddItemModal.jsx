@@ -2,7 +2,7 @@ import "./AddItemModal.css";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
-import { settings, defaultValues } from "../../utils/constants.js";
+import { defaultValues } from "../../utils/constants.js";
 
 function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
   const {
@@ -14,7 +14,7 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
     handleRadioBtn,
     isChecked,
     isDisabled,
-    setIsDisabled,
+    formHandleChange,
   } = useForm();
 
   const handleSubmit = (evt) => {
@@ -34,6 +34,7 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
         onSubmit={handleSubmit}
         error={error}
         isDisabled={isDisabled}
+        formHandleChange={formHandleChange}
       >
         <label htmlFor="garment-name-input" className="modal__label">
           Name

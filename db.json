@@ -281,6 +281,12 @@
       "imageUrl": "https://www.angeljackets.com/product_images/a/930/leather_jackets_hooded_mens__74742_zoom.webp",
       "weather": "hot",
       "_id": 74
+    },
+    {
+      "name": "jgit status",
+      "imageUrl": "https://assets.manufactum.de/p/208/208470/208470_01.jpg/ladies-leather-boots.jpg?profile=pdsmain_1000",
+      "weather": "warm",
+      "_id": 75
     }
   ]
 }

@@ -22,12 +22,6 @@ function useForm() {
   function handleChange(evt) {
     const { name, value } = evt.target;
     setValues({ ...values, [name]: value });
-    console.log(error);
-    if (error.name === "" && error.imageUrl === "") {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
   }
 
   function handleName(evt) {
@@ -51,6 +45,17 @@ function useForm() {
     setIsChecked(inputChecked);
   }
 
+  const formHandleChange = () => {
+    const keys = (key) => key === false;
+    const newTest = Object.values(isChecked);
+
+    if (error.name === "" && error.imageUrl === "" && !newTest.every(keys)) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  };
+
   return {
     values,
     setValues,
@@ -61,6 +66,7 @@ function useForm() {
     isChecked,
     setIsChecked,
     isDisabled,
+    formHandleChange,
   };
 }
 export default useForm;

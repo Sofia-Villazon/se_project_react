@@ -41,7 +41,6 @@ export {
   apiKey,
   coordinates,
   user,
-  settings,
   handleServerResponse,
   defaultValues,
   defaultInputCheck,

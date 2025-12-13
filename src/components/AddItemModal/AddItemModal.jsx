@@ -19,7 +19,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (error === defaultValues) {
+    const hasErrors = Object.values(error).some((e) => e !== "");
+    if (!hasErrors) {
       onAddItem(values);
       setValues(defaultValues);
     }

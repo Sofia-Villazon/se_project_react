@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { defaultValues, defaultInputCheck } from "../utils/constants";
 
 function useForm() {
@@ -7,65 +7,54 @@ function useForm() {
   const [isChecked, setIsChecked] = useState(defaultInputCheck);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const validate = useCallback(
-    (inputValidity, inputName) => {
-      const newErrors = { ...error };
-      if (!inputValidity) {
-        newErrors[inputName] =
-          inputName === "name"
-            ? "Name is required and must be 2-40 characters"
-            : "Please provide a valid URL";
-      } else {
-        newErrors[inputName] = "";
-      }
-      setError(newErrors);
-    },
-    [error]
-  );
+  let newErrors = defaultValues;
+  let inputChecked = defaultInputCheck;
 
-  const handleChange = useCallback(
-    (evt) => {
-      const { name, value } = evt.target;
-      setValues({ ...values, [name]: value });
-    },
-    [values]
-  );
+  const validate = (inputValidity, inputName) => {
+    if (!inputValidity) {
+      newErrors[inputName] = `write ${inputName}`;
+    } else {
+      newErrors[inputName] = "";
+    }
+    setError(newErrors);
+  };
 
-  const handleName = useCallback(
-    (evt) => {
-      const input = evt.target;
-      validate(input.validity.valid, evt.target.name);
-      handleChange(evt);
-    },
-    [validate, handleChange]
-  );
+  function handleChange(evt) {
+    const { name, value } = evt.target;
+    setValues({ ...values, [name]: value });
+  }
 
-  const handleImage = useCallback(
-    (evt) => {
-      handleChange(evt);
-      const input = evt.target;
-      validate(input.validity.valid, evt.target.name);
-    },
-    [handleChange, validate]
-  );
+  function handleName(evt) {
+    const input = evt.target;
+    validate(input.validity.valid, evt.target.name);
+    handleChange(evt);
+  }
 
-  const handleRadioBtn = useCallback(
-    (evt) => {
-      handleChange(evt);
-      const input = evt.target;
-      validate(input.validity.valid, evt.target.name);
-      const newChecked = { ...isChecked };
-      newChecked[input.value] = true;
-      setIsChecked(newChecked);
-    },
-    [handleChange, validate, isChecked]
-  );
+  function handleImage(evt) {
+    handleChange(evt);
+    const input = evt.target;
 
-  const formHandleChange = useCallback(() => {
-    const hasChecked = Object.values(isChecked).some((checked) => checked);
-    const noErrors = error.name === "" && error.imageUrl === "";
-    setIsDisabled(!(noErrors && hasChecked));
-  }, [isChecked, error]);
+    validate(input.validity.valid, evt.target.name);
+  }
+
+  function handleRadioBtn(evt) {
+    handleChange(evt);
+    const input = evt.target;
+    validate(input.validity.valid, evt.target.name);
+    inputChecked[input.value] = true;
+    setIsChecked(inputChecked);
+  }
+
+  const formHandleChange = () => {
+    const keys = (key) => key === false;
+    const newTest = Object.values(isChecked);
+
+    if (error.name === "" && error.imageUrl === "" && !newTest.every(keys)) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  };
 
   return {
     values,

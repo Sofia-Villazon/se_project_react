@@ -14,8 +14,8 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 
 import { getItems, addItems, deleteItems } from "../../utils/api.js";
 
-import "./App.css";
 import "../../vendor/normalize.css";
+import "./App.css";
 
 function App() {
   const [weatherData, setWeatherData] = useState({

@@ -178,7 +178,7 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
-  console.log(isLoggedIn);
+
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     !isLiked

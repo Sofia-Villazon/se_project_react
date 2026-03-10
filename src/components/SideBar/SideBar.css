@@ -1,6 +1,7 @@
 .side-bar {
   margin: 0;
-  width: 345px;
+  max-width: 229px;
+  width: 100%;
 }
 .side-bar__user-container {
   margin: 0;
@@ -21,10 +22,36 @@
 .side-bar__user-name {
   width: fit-content;
   margin-left: 16px;
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk";
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
+}
+
+.sider-bar__user-btns {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 8px;
+}
+
+.side-bar__btn {
+  padding: 0;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  width: fit-content;
+  text-align: left;
+}
+
+.side-bar__btn:hover {
+  cursor: pointer;
+  opacity: 60%;
 }
 
 @media screen and (max-width: 630px) {

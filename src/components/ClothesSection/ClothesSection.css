@@ -23,6 +23,7 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
+  height: fit-content;
 }
 
 .clothing-selection__button:hover {

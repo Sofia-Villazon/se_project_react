@@ -1,0 +1,86 @@
+.modal_nf {
+  margin: 0;
+  visibility: hidden;
+  background-color: #00000080;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    visibility 0s linear 0.5s,
+    opacity 0.5s linear;
+}
+
+.modal_nf_is-opened {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.modal_nf__container {
+  padding: 60px 152px;
+  background-color: #ffffff;
+  max-width: 496px;
+  max-height: 160px;
+  width: 100%;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal_nf__close-btn {
+  padding: 0;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 20px;
+  top: 20px;
+  border: none;
+  background: center / contain no-repeat rgb(0, 0, 0, 0)
+    url(../../assets/close-btn.svg);
+}
+
+.modal_nf__close-btn:hover {
+  cursor: pointer;
+  opacity: 60%;
+}
+
+.modal_nf__caption {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 40px;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.modal_nf__btn {
+  padding: 0;
+  width: fit-content;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  background-color: transparent;
+  padding-bottom: 24px;
+}
+
+.modal_nf__btn_cancel {
+  color: #ff4d00;
+}
+
+@media screen and (max-width: 630px) {
+  .modal_nf__container {
+    max-width: 343px;
+    max-height: 463px;
+  }
+}

@@ -11,6 +11,8 @@ function ModalWithForm({
   isOpen,
   isDisabled,
   formHandleChange,
+  sign,
+  changeName,
 }) {
   const { setIsChecked, isChecked, values } = useForm();
   const uncheckCheckbox = () => {
@@ -32,14 +34,21 @@ function ModalWithForm({
           onChange={formHandleChange}
         >
           {children}
-          <button
-            type="submit"
-            className="modal__submit-btn"
-            disabled={isDisabled}
-            onClick={uncheckCheckbox}
-          >
-            {buttonText}
-          </button>
+          <div className="modal__btns">
+            <button
+              type="submit"
+              className="modal__submit-btn"
+              disabled={isDisabled}
+              onClick={uncheckCheckbox}
+            >
+              {buttonText}
+            </button>
+            {sign ? (
+              <button className="modal__change-btn" disabled={isDisabled}>
+                {changeName}
+              </button>
+            ) : null}
+          </div>
         </form>
       </div>
     </section>

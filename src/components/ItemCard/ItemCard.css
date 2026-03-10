@@ -11,11 +11,17 @@
   justify-content: center;
 }
 
+.item-card__header {
+  position: absolute;
+  top: 15px;
+  display: flex;
+  gap: 10px;
+  height: 24px;
+}
+
 .item-card__name {
   margin: 0 auto;
   padding: 2px 12px;
-  position: absolute;
-  top: 15px;
   background-color: #ffffff;
   border-radius: 4px;
   font-family: "Cabinet Grotesk";
@@ -24,6 +30,23 @@
   color: #00000099;
 }
 
+.item-card__like-btn {
+  padding: 0;
+  width: 18px;
+  margin: auto 0;
+  height: 15px;
+  border: none;
+  background: center / contain no-repeat rgb(0, 0, 0, 0)
+    url(../../assets/like-btn.svg);
+  transition: background-image 700ms ease-in-out;
+}
+
+.item-card__like-btn_active {
+  background-image: url(../../assets/like-btn-active.svg);
+}
+.item-card__like-btn:hover {
+  cursor: pointer;
+}
 .item-card__image {
   object-fit: cover;
   width: 100%;

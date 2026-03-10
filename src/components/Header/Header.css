@@ -42,6 +42,10 @@
   visibility: hidden;
 }
 
+.header__user-info {
+  display: flex;
+}
+
 .header__button {
   width: 116px;
   padding: 8px 0 7px;
@@ -79,6 +83,23 @@
   max-height: 100%;
   object-fit: cover;
   border-radius: 100%;
+}
+
+.header__register-login-btns {
+  display: flex;
+  align-content: center;
+  width: 139px;
+  justify-content: space-between;
+}
+
+.header__register-login-btn {
+  padding: 0;
+  line-height: 100%;
+  border: none;
+}
+
+.header__register-login-btn:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 630px) {

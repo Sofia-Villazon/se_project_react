@@ -22,4 +22,9 @@ The idea of the application is pretty simple - we make a call to an API, which t
 - Responsive design for mobile and desktop screen sizes
 - Modal functionality for adding garments
 - Temperature-based clothing filtering
+- Responsive like and unlike for the clothing items
+- Authorization and authentification implemented
 
+## Backend project
+
+-[Project Link](https://github.com/Sofia-Villazon/se_project_express)

@@ -3,10 +3,16 @@ import SideBar from "../SideBar/SideBar";
 
 import "./Profile.css";
 
-function Profile({ clothingItems, handleCardClick, handleAddClick }) {
+function Profile({
+  clothingItems,
+  handleCardClick,
+  handleAddClick,
+  user,
+  handleLogOut,
+}) {
   return (
     <section className="profile">
-      <SideBar />
+      <SideBar user={user} handleLogOut={handleLogOut} />
       <ClothesSection
         clothingItems={clothingItems}
         handleCardClick={handleCardClick}

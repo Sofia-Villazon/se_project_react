@@ -1,4 +1,3 @@
-import avatar from "../assets/avatar.jpg";
 import cloudyD from "../assets/day/cloudy.svg";
 import sunnyD from "../assets/day/sunny.svg";
 import rainD from "../assets/day/rain.svg";
@@ -12,16 +11,22 @@ import snowN from "../assets/night/snow.svg";
 import fogN from "../assets/night/fog.svg";
 import stormN from "../assets/night/storm.svg";
 
-const user = {
-  name: "Sofia Villazon",
-  avatar,
-};
-
 const defaultValues = { name: "", imageUrl: "", weather: "" };
 const defaultInputCheck = {
   hot: false,
   warm: false,
   cold: false,
+};
+const defaultUserR = {
+  name: "",
+  avatar: "",
+  email: "",
+  password: "",
+};
+
+const defaultUserL = {
+  email: "",
+  password: "",
 };
 const coordinates = { latitude: 45.551011, longitude: -73.445352 };
 
@@ -40,8 +45,9 @@ export {
   weatherCard,
   apiKey,
   coordinates,
-  user,
   handleServerResponse,
   defaultValues,
   defaultInputCheck,
+  defaultUserR,
+  defaultUserL,
 };

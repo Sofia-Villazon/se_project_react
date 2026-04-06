@@ -3,10 +3,10 @@ import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
 
-function RegisterModal({ isOpen, onSignUp, closeActiveModal }) {
+function RegisterModal({ isOpen, onSignUp, closeActiveModal, toggleModal }) {
   const {
     userData,
-    errorR,
+    errorRegistration,
     handleSignupInput,
     isDisabled,
     formHandleChangeSignup,
@@ -14,7 +14,6 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal }) {
 
   const onRegistration = (e) => {
     e.preventDefault();
-    // console.log(userData);
     onSignUp(userData);
   };
 
@@ -25,16 +24,16 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal }) {
         titleText="Register"
         isOpen={isOpen}
         closeActiveModal={closeActiveModal}
-        sign
         changeName="or Login"
         onSubmit={onRegistration}
         isDisabled={isDisabled}
         formHandleChange={formHandleChangeSignup}
+        toggleModal={toggleModal}
       >
         <label htmlFor="register-email-input" className="modal__label">
           Email*
-          <span className="modal__error" id="login-email-input-error">
-            {errorR.email}
+          <span className="modal__error" id="register-email-input-error">
+            {errorRegistration.email}
           </span>
           <input
             id="register-email-input"
@@ -52,7 +51,7 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal }) {
         <label htmlFor="register-password-input" className="modal__label">
           Password*
           <span className="modal__error" id="register-password-input-error">
-            {errorR.password}
+            {errorRegistration.password}
           </span>
           <input
             id="register-password-input"
@@ -70,7 +69,7 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal }) {
         <label htmlFor="register-name-input" className="modal__label">
           Name
           <span className="modal__error" id="register-name-input-error">
-            {errorR.name}
+            {errorRegistration.name}
           </span>
           <input
             id="register-name-input"
@@ -87,7 +86,7 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal }) {
         <label htmlFor="register-avatar-input" className="modal__label">
           Avatar URL
           <span className="modal__error" id="register-avatar-input-error">
-            {errorR.avatar}
+            {errorRegistration.avatar}
           </span>
           <input
             id="register-avatar-input"

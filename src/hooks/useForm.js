@@ -9,9 +9,9 @@ import {
 function useForm() {
   const [values, setValues] = useState(defaultValues);
   const [error, setError] = useState(defaultValues);
-  const [errorR, setErrorR] = useState(defaultUserR);
+  const [errorRegistration, setErrorRegistration] = useState(defaultUserR);
   const [userData, setUserData] = useState(defaultUserR);
-  const [errorL, setErrorL] = useState(defaultUserL);
+  const [errorLogin, setErrorLogin] = useState(defaultUserL);
   const [userDataL, setUserDataL] = useState(defaultUserL);
   const [isChecked, setIsChecked] = useState(defaultInputCheck);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -35,7 +35,7 @@ function useForm() {
 
   const validateRegistration = useCallback(
     (inputValidity, inputName) => {
-      const newErrors = { ...errorR };
+      const newErrors = { ...errorRegistration };
       if (!inputValidity) {
         newErrors[inputName] =
           inputName === "name"
@@ -48,14 +48,14 @@ function useForm() {
       } else {
         newErrors[inputName] = "";
       }
-      setErrorR(newErrors);
+      setErrorRegistration(newErrors);
     },
-    [errorR]
+    [errorRegistration]
   );
 
   const validateLogin = useCallback(
     (inputValidity, inputName) => {
-      const newErrors = { ...errorL };
+      const newErrors = { ...errorLogin };
       if (!inputValidity) {
         newErrors[inputName] =
           inputName === "email"
@@ -64,9 +64,9 @@ function useForm() {
       } else {
         newErrors[inputName] = "";
       }
-      setErrorL(newErrors);
+      setErrorLogin(newErrors);
     },
-    [errorL]
+    [errorLogin]
   );
 
   // Change handlers
@@ -74,9 +74,9 @@ function useForm() {
   const handleChange = useCallback(
     (evt) => {
       const { name, value } = evt.target;
-      setValues({ ...values, [name]: value });
+      setUserData({ ...userData, [name]: value });
     },
-    [values]
+    [userData]
   );
 
   const handleChangeSignup = useCallback((evt) => {
@@ -134,6 +134,15 @@ function useForm() {
     [validateRegistration, handleChangeSignup]
   );
 
+  const handleUpdateInput = useCallback(
+    (evt) => {
+      const input = evt.target;
+      validate(input.validity.valid, evt.target.name);
+      handleChange(evt);
+    },
+    [validate, handleChange]
+  );
+
   const handleSigninInput = useCallback(
     (evt) => {
       const input = evt.target;
@@ -153,17 +162,23 @@ function useForm() {
 
   const formHandleChangeSignup = useCallback(() => {
     const noErrors =
-      errorR.name === "" &&
-      errorR.avatar === "" &&
-      errorR.password === "" &&
-      errorR.email === "";
+      errorRegistration.name === "" &&
+      errorRegistration.avatar === "" &&
+      errorRegistration.password === "" &&
+      errorRegistration.email === "";
     setIsDisabled(!noErrors);
-  }, [errorR]);
+  }, [errorRegistration]);
+
+  const formHandleChangeUpdate = useCallback(() => {
+    const noErrors =
+      errorRegistration.name === "" && errorRegistration.avatar === "";
+    setIsDisabled(!noErrors);
+  }, [errorRegistration]);
 
   const formHandleChangeSignin = useCallback(() => {
-    const noErrors = errorL.password === "" && errorL.email === "";
+    const noErrors = errorLogin.password === "" && errorLogin.email === "";
     setIsDisabled(!noErrors);
-  }, [errorL]);
+  }, [errorLogin]);
 
   return {
     values,
@@ -172,18 +187,20 @@ function useForm() {
     setUserData,
     userDataL,
     error,
-    errorR,
-    errorL,
+    errorRegistration,
+    errorLogin,
     handleName,
     handleImage,
     handleRadioBtn,
     handleSigninInput,
     handleSignupInput,
+    handleUpdateInput,
     isChecked,
     setIsChecked,
     isDisabled,
     formHandleChange,
     formHandleChangeSignup,
+    formHandleChangeUpdate,
     formHandleChangeSignin,
   };
 }

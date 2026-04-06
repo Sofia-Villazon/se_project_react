@@ -6,7 +6,6 @@ import "./ClothesSection.css";
 
 function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
   const { currentUser } = useContext(CurrentUserContext);
-  // const isOwn = card.owner === userData._id;
   const clothingCards = clothingItems
     .filter((item) => item.owner === currentUser._id)
     .map((item) => {

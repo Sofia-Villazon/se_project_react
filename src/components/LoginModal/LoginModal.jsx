@@ -2,11 +2,11 @@ import "./LoginModal.css";
 import useForm from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({ isOpen, onSignin, closeActiveModal }) {
+function LoginModal({ isOpen, onSignin, closeActiveModal, toggleModal }) {
   const {
     userDataL,
     handleSigninInput,
-    errorL,
+    errorLogin,
     isDisabled,
     formHandleChangeSignin,
   } = useForm();
@@ -23,16 +23,16 @@ function LoginModal({ isOpen, onSignin, closeActiveModal }) {
         titleText="Login"
         isOpen={isOpen}
         closeActiveModal={closeActiveModal}
-        sign
         changeName="or Register"
         onSubmit={onLogin}
         isDisabled={isDisabled}
         formHandleChange={formHandleChangeSignin}
+        toggleModal={toggleModal}
       >
         <label htmlFor="login-email-input" className="modal__label">
           Email
           <span className="modal__error" id="login-email-input-error">
-            {errorL.email}
+            {errorLogin.email}
           </span>
           <input
             id="login-email-input"
@@ -48,7 +48,7 @@ function LoginModal({ isOpen, onSignin, closeActiveModal }) {
         <label htmlFor="login-password-input" className="modal__label">
           Password
           <span className="modal__error" id="login-password-input-error">
-            {errorL.password}
+            {errorLogin.password}
           </span>
           <input
             id="login-password-input"

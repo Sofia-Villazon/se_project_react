@@ -24,6 +24,13 @@ const defaultUserR = {
   password: "",
 };
 
+const defaultUserU = {
+  name: "",
+  avatar: "",
+  email: "",
+  password: "",
+};
+
 const defaultUserL = {
   email: "",
   password: "",
@@ -50,4 +57,5 @@ export {
   defaultInputCheck,
   defaultUserR,
   defaultUserL,
+  defaultUserU,
 };

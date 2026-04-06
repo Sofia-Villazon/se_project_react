@@ -34,7 +34,7 @@ const addItems = ({ name, imageUrl, weather }) => {
   }).then(handleServerResponse);
 };
 
-const deleteItems = (id) => {
+const deleteItems = (id, token) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
@@ -53,9 +53,7 @@ const getUserInfo = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
-  });
+  }).then(handleServerResponse);
 };
 
 const addCardLike = (id, token) => {

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-
+import { useContext } from "react";
+import CurrentUserContext from "../../hooks/contexts/CurrentUserContext";
 import "./Header.css";
 import logo from "../../assets/logo.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
@@ -13,8 +14,8 @@ function Header({
   activeModal,
   closeActiveModal,
   weatherData,
-  user,
 }) {
+  const { userData } = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -61,12 +62,23 @@ function Header({
             </button>
             <NavLink className="header__nav-link" to="/profile">
               <div className="header__user-container">
-                <p className="header__user-name">{user.name}</p>
-                <img
-                  src={user.avatar}
-                  alt={user.name}
+                <p className="header__user-name">{userData.name}</p>
+                {/* <img
+                  src={userData.avatar}
+                  alt={userData.name}
                   className="header__avatar"
-                />
+                /> */}
+                {userData.avatar ? (
+                  <img
+                    src={userData.avatar}
+                    alt={userData.name}
+                    className="header__avatar"
+                  />
+                ) : (
+                  <div className="header__avatar-placeholder">
+                    {userData.name.charAt(0).toUpperCase()}
+                  </div>
+                )}
               </div>
             </NavLink>
           </div>

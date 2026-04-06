@@ -1,0 +1,29 @@
+function createCounter() {
+  let counter = 0;
+
+  function increaseCounter() {
+    counter = counter + 1;
+  }
+
+  return {
+    increaseCounter,
+  };
+}
+
+window.__count = 0;
+function __detectInfiniteLoop(loopStart) {
+    const isTimeout = (Date.now() - loopStart) > 10000;
+    if (window.__count > 10e4 || isTimeout) {
+        // because tests can create their own console object
+        window.console.error('Infinite Loop detected');
+
+        const loopError = new Error('Infinite Loop detected');
+        loopError.type = 'infinite_loop';
+
+        window.parent.postMessage(JSON.stringify({type: 'infinite_loop'}), '*');
+
+        throw loopError;
+    }
+
+    window.__count += 1;
+};

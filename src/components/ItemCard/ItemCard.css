@@ -42,7 +42,13 @@
 }
 
 .item-card__like-btn_active {
-  background-image: url(../../assets/like-btn-active.svg);
+  background: url(../../assets/like-btn-active.svg);
+}
+
+.modal__like-btn_hidden {
+  background: none;
+  appearance: none;
+  border: none;
 }
 .item-card__like-btn:hover {
   cursor: pointer;

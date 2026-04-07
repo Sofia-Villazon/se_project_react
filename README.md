@@ -27,4 +27,4 @@ The idea of the application is pretty simple - we make a call to an API, which t
 
 ## Backend project
 
--[Project Link](https://github.com/Sofia-Villazon/se_project_express)
+-[Project Link](https://github.com/Sofia-Villazon/se_project_express.git)

@@ -31,6 +31,7 @@ import * as auth from "../../utils/auth.js";
 
 import "../../vendor/normalize.css";
 import "./App.css";
+import { defaultCurrentUser } from "../../utils/constants.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -51,11 +52,7 @@ function App() {
     email: "",
     avatar: "",
   });
-  const [currentUser, setCurrentUser] = useState({
-    username: "",
-    email: "",
-    avatar: "",
-  });
+  const [currentUser, setCurrentUser] = useState(defaultCurrentUser);
 
   const navigate = useNavigate();
 
@@ -92,6 +89,7 @@ function App() {
         if (data.token) {
           setToken(data.token);
           setUserData(data.user);
+
           setIsLoggedIn(true);
           closeActiveModal();
           navigate("/");
@@ -127,14 +125,14 @@ function App() {
     auth
       .checkToken(jwt)
       .then((userData) => {
-        setCurrentUser(userData); // This should include _id
+        setCurrentUser(userData);
         setIsLoggedIn(true);
       })
       .catch((error) => {
         console.log("Token validation failed:", error);
         localStorage.removeItem("jwt");
       });
-  }, [currentUser]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     getItems().then((data) => {
@@ -276,7 +274,9 @@ function App() {
       value={{
         isLoggedIn,
         setIsLoggedIn,
+        setUserData,
         userData,
+        setCurrentUser,
         currentUser,
         handleLogOut,
         handleUpdateModal,

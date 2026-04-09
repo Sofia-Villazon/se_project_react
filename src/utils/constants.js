@@ -24,6 +24,12 @@ const defaultUserR = {
   password: "",
 };
 
+const defaultCurrentUser = {
+  username: "",
+  email: "",
+  avatar: "",
+};
+
 const defaultUserU = {
   name: "",
   avatar: "",
@@ -58,4 +64,5 @@ export {
   defaultUserR,
   defaultUserL,
   defaultUserU,
+  defaultCurrentUser,
 };

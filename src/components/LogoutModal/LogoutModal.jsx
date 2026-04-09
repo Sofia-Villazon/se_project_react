@@ -5,13 +5,17 @@ import CurrentUserContext from "../../hooks/contexts/CurrentUserContext";
 import { useNavigate } from "react-router-dom";
 
 import { removeToken } from "../../utils/token";
+import { defaultCurrentUser } from "../../utils/constants";
 
 function LogoutModal({ closeActiveModal, isOpen }) {
+  const { setUserData, setCurrentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(CurrentUserContext);
   const signOut = () => {
     removeToken();
     setIsLoggedIn(false);
+    setUserData(defaultCurrentUser);
+    setCurrentUser(defaultCurrentUser);
     closeActiveModal();
     navigate("/");
   };

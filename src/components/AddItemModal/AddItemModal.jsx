@@ -2,7 +2,7 @@ import "./AddItemModal.css";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
-import { defaultValues } from "../../utils/constants.js";
+import { defaultValues, defaultInputCheck } from "../../utils/constants.js";
 
 function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
   const {
@@ -12,7 +12,9 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
     error,
     handleName,
     handleRadioBtn,
+    setIsChecked,
     isChecked,
+    setIsDisabled,
     isDisabled,
     formHandleChange,
   } = useForm();
@@ -23,6 +25,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
     if (!hasErrors) {
       onAddItem(values);
       setValues(defaultValues);
+      setIsChecked(defaultInputCheck);
+      setIsDisabled(false);
     }
   };
   return (

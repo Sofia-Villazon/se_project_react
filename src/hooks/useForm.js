@@ -74,7 +74,18 @@ function useForm() {
   const handleChange = useCallback(
     (evt) => {
       const { name, value } = evt.target;
-      setUserData({ ...userData, [name]: value });
+      setValues({ ...values, [name]: value });
+    },
+    [values]
+  );
+
+  const handleChangeUpdate = useCallback(
+    (evt) => {
+      const { name, value } = evt.target;
+      setUserData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
     },
     [userData]
   );
@@ -138,7 +149,7 @@ function useForm() {
     (evt) => {
       const input = evt.target;
       validate(input.validity.valid, evt.target.name);
-      handleChange(evt);
+      handleChangeUpdate(evt);
     },
     [validate, handleChange]
   );

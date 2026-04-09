@@ -14,12 +14,11 @@ function UpdateUserModal({ isOpen, closeActiveModal, onSubmit }) {
     userData,
     setUserData,
   } = useForm();
-  console.log(currentUser);
   useEffect(() => {
     if (isOpen) {
       setUserData({
-        name: userData.name,
-        avatar: userData.avatar,
+        name: currentUser.name,
+        avatar: currentUser.avatar,
       });
     }
   }, [isOpen, currentUser]);
@@ -28,6 +27,7 @@ function UpdateUserModal({ isOpen, closeActiveModal, onSubmit }) {
     e.preventDefault();
     onSubmit({ name: e.target.name.value, avatar: e.target.avatar.value });
   };
+
   return (
     <>
       <ModalWithForm

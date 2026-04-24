@@ -43,7 +43,11 @@ function ModalWithForm({
             >
               {buttonText}
             </button>
-            <button className="modal__change-btn" onClick={toggleModal}>
+            <button
+              className="modal__change-btn"
+              type="button"
+              onClick={toggleModal}
+            >
               {changeName}
             </button>
           </div>

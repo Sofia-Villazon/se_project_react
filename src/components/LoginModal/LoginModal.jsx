@@ -1,20 +1,30 @@
 import "./LoginModal.css";
 import useForm from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { defaultLogData } from "../../utils/constants";
+import { useEffect } from "react";
 
-function LoginModal({ isOpen, onSignin, closeActiveModal, toggleModal }) {
-  const {
-    userDataL,
-    handleSigninInput,
-    errorLogin,
-    isDisabled,
-    formHandleChangeSignin,
-  } = useForm();
+function LoginModal({
+  isOpen,
+  onSignin,
+  closeActiveModal,
+  toggleModal,
+  loginData,
+  setLoginData,
+}) {
+  const { setUserDataL, handleInput, error, isDisabled, formHandleChange } =
+    useForm(defaultLogData);
 
   const onLogin = (e) => {
     e.preventDefault();
-    onSignin(userDataL);
+    onSignin(loginData);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      setLoginData(defaultLogData);
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -26,13 +36,13 @@ function LoginModal({ isOpen, onSignin, closeActiveModal, toggleModal }) {
         changeName="or Register"
         onSubmit={onLogin}
         isDisabled={isDisabled}
-        formHandleChange={formHandleChangeSignin}
+        formHandleChange={formHandleChange}
         toggleModal={toggleModal}
       >
         <label htmlFor="login-email-input" className="modal__label">
           Email
           <span className="modal__error" id="login-email-input-error">
-            {errorLogin.email}
+            {error.email}
           </span>
           <input
             id="login-email-input"
@@ -41,14 +51,14 @@ function LoginModal({ isOpen, onSignin, closeActiveModal, toggleModal }) {
             className="modal__input"
             placeholder="Email"
             required
-            value={userDataL.email}
-            onChange={handleSigninInput}
+            value={loginData.email}
+            onChange={(evt) => handleInput(evt, setLoginData)}
           />
         </label>
         <label htmlFor="login-password-input" className="modal__label">
           Password
           <span className="modal__error" id="login-password-input-error">
-            {errorLogin.password}
+            {error.password}
           </span>
           <input
             id="login-password-input"
@@ -59,8 +69,8 @@ function LoginModal({ isOpen, onSignin, closeActiveModal, toggleModal }) {
             minLength="8"
             maxLength="10"
             required
-            value={userDataL.password}
-            onChange={handleSigninInput}
+            value={loginData.password}
+            onChange={(evt) => handleInput(evt, setLoginData)}
           />
         </label>
       </ModalWithForm>

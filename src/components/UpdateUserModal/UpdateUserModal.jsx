@@ -3,25 +3,23 @@ import useForm from "../../hooks/useForm";
 import { useContext, useEffect } from "react";
 import CurrentUserContext from "../../hooks/contexts/CurrentUserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { defaultRegData } from "../../utils/constants";
 
-function UpdateUserModal({ isOpen, closeActiveModal, onSubmit }) {
-  const { currentUser } = useContext(CurrentUserContext);
-  const {
-    handleUpdateInput,
-    error,
-    isDisabled,
-    formHandleChangeUpdate,
-    userData,
-    setUserData,
-  } = useForm();
+function UpdateUserModal({
+  isOpen,
+  closeActiveModal,
+  onSubmit,
+  setRegisteredData,
+  registeredData,
+}) {
+  const { userData } = useContext(CurrentUserContext);
+  const { handleInput, error, isDisabled, formHandleChange } =
+    useForm(defaultRegData);
   useEffect(() => {
     if (isOpen) {
-      setUserData({
-        name: currentUser.name,
-        avatar: currentUser.avatar,
-      });
+      setRegisteredData(userData);
     }
-  }, [isOpen, currentUser]);
+  }, [isOpen, userData]);
 
   const onUpdateUser = (e) => {
     e.preventDefault();
@@ -37,7 +35,7 @@ function UpdateUserModal({ isOpen, closeActiveModal, onSubmit }) {
         closeActiveModal={closeActiveModal}
         onSubmit={onUpdateUser}
         isDisabled={isDisabled}
-        formHandleChange={formHandleChangeUpdate}
+        formHandleChange={formHandleChange}
       >
         <label htmlFor="update-user-name-input" className="modal__label">
           Name*
@@ -53,8 +51,8 @@ function UpdateUserModal({ isOpen, closeActiveModal, onSubmit }) {
             minLength="2"
             maxLength="40"
             required
-            value={userData.name || ""}
-            onChange={handleUpdateInput}
+            value={registeredData.name || ""}
+            onChange={(evt) => handleInput(evt, setRegisteredData)}
           />
         </label>
         <label htmlFor="update-user-avatar-input" className="modal__label">
@@ -69,8 +67,8 @@ function UpdateUserModal({ isOpen, closeActiveModal, onSubmit }) {
             className="modal__input"
             placeholder="avatar"
             required
-            value={userData.avatar || ""}
-            onChange={handleUpdateInput}
+            value={registeredData.avatar || ""}
+            onChange={(evt) => handleInput(evt, setRegisteredData)}
           />
         </label>
       </ModalWithForm>

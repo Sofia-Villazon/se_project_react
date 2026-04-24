@@ -1,41 +1,15 @@
 import { useState, useCallback } from "react";
-import {
-  defaultValues,
-  defaultInputCheck,
-  defaultUserR,
-  defaultUserL,
-} from "../utils/constants";
+import { defaultInputCheck, defaultClothValues } from "../utils/constants";
 
-function useForm() {
-  const [values, setValues] = useState(defaultValues);
+function useForm(defaultValues, values) {
   const [error, setError] = useState(defaultValues);
-  const [errorRegistration, setErrorRegistration] = useState(defaultUserR);
-  const [userData, setUserData] = useState(defaultUserR);
-  const [errorLogin, setErrorLogin] = useState(defaultUserL);
-  const [userDataL, setUserDataL] = useState(defaultUserL);
-  const [isChecked, setIsChecked] = useState(defaultInputCheck);
+  const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   // Validation
   const validate = useCallback(
     (inputValidity, inputName) => {
       const newErrors = { ...error };
-      if (!inputValidity) {
-        newErrors[inputName] =
-          inputName === "name"
-            ? "Name is required and must be 2-40 characters"
-            : "Please provide a valid URL";
-      } else {
-        newErrors[inputName] = "";
-      }
-      setError(newErrors);
-    },
-    [error]
-  );
-
-  const validateRegistration = useCallback(
-    (inputValidity, inputName) => {
-      const newErrors = { ...errorRegistration };
       if (!inputValidity) {
         newErrors[inputName] =
           inputName === "name"
@@ -48,171 +22,55 @@ function useForm() {
       } else {
         newErrors[inputName] = "";
       }
-      setErrorRegistration(newErrors);
+      setError(newErrors);
     },
-    [errorRegistration]
+    [error]
   );
-
-  const validateLogin = useCallback(
-    (inputValidity, inputName) => {
-      const newErrors = { ...errorLogin };
-      if (!inputValidity) {
-        newErrors[inputName] =
-          inputName === "email"
-            ? "Please provide a valid email adress"
-            : "Password is required and must be 8-10 characters";
-      } else {
-        newErrors[inputName] = "";
-      }
-      setErrorLogin(newErrors);
-    },
-    [errorLogin]
-  );
-
-  // Change handlers
 
   const handleChange = useCallback(
-    (evt) => {
+    (evt, setFunction) => {
       const { name, value } = evt.target;
-      setValues({ ...values, [name]: value });
-    },
-    [values]
-  );
-
-  const handleChangeUpdate = useCallback(
-    (evt) => {
-      const { name, value } = evt.target;
-      setUserData((prevData) => ({
+      setFunction((prevData) => ({
         ...prevData,
         [name]: value,
       }));
     },
-    [userData]
+    [values]
   );
-
-  const handleChangeSignup = useCallback((evt) => {
-    const { name, value } = evt.target;
-    setUserData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  });
-
-  const handleChangeSignin = useCallback((evt) => {
-    const { name, value } = evt.target;
-    setUserDataL((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  });
-
-  const handleName = useCallback(
-    (evt) => {
+  const handleInput = useCallback(
+    (evt, setFunction) => {
       const input = evt.target;
       validate(input.validity.valid, evt.target.name);
-      handleChange(evt);
+      // console.log(error);
+      handleChange(evt, setFunction);
     },
     [validate, handleChange]
-  );
-
-  const handleImage = useCallback(
-    (evt) => {
-      handleChange(evt);
-      const input = evt.target;
-      validate(input.validity.valid, evt.target.name);
-    },
-    [handleChange, validate]
   );
 
   const handleRadioBtn = useCallback(
-    (evt) => {
-      handleChange(evt);
-      const input = evt.target;
-      validate(input.validity.valid, evt.target.name);
-      const newChecked = { ...isChecked };
-      newChecked[input.value] = true;
-      setIsChecked(newChecked);
+    (evt, setFunction) => {
+      handleChange(evt, setFunction);
+      setIsChecked(true);
     },
-    [handleChange, validate, isChecked]
+    [handleChange]
   );
-
-  const handleSignupInput = useCallback(
-    (evt) => {
-      const input = evt.target;
-      validateRegistration(input.validity.valid, evt.target.name);
-      handleChangeSignup(evt);
-    },
-    [validateRegistration, handleChangeSignup]
-  );
-
-  const handleUpdateInput = useCallback(
-    (evt) => {
-      const input = evt.target;
-      validate(input.validity.valid, evt.target.name);
-      handleChangeUpdate(evt);
-    },
-    [validate, handleChange]
-  );
-
-  const handleSigninInput = useCallback(
-    (evt) => {
-      const input = evt.target;
-      validateLogin(input.validity.valid, evt.target.name);
-      handleChangeSignin(evt);
-    },
-    [validateLogin, handleChangeSignin]
-  );
-
-  // Form change handlers
 
   const formHandleChange = useCallback(() => {
-    const hasChecked = Object.values(isChecked).some((checked) => checked);
-    const noErrors = error.name === "" && error.imageUrl === "";
-    setIsDisabled(!(noErrors && hasChecked));
-  }, [isChecked, error]);
-
-  const formHandleChangeSignup = useCallback(() => {
-    const noErrors =
-      errorRegistration.name === "" &&
-      errorRegistration.avatar === "" &&
-      errorRegistration.password === "" &&
-      errorRegistration.email === "";
+    const noErrors = Object.values(error).every((v) => v === "");
+    console.log(noErrors);
+    // console.log(error);
     setIsDisabled(!noErrors);
-  }, [errorRegistration]);
-
-  const formHandleChangeUpdate = useCallback(() => {
-    const noErrors =
-      errorRegistration.name === "" && errorRegistration.avatar === "";
-    setIsDisabled(!noErrors);
-  }, [errorRegistration]);
-
-  const formHandleChangeSignin = useCallback(() => {
-    const noErrors = errorLogin.password === "" && errorLogin.email === "";
-    setIsDisabled(!noErrors);
-  }, [errorLogin]);
+  }, [error]);
 
   return {
-    values,
-    setValues,
-    userData,
-    setUserData,
-    userDataL,
     error,
-    errorRegistration,
-    errorLogin,
-    handleName,
-    handleImage,
+    handleInput,
     handleRadioBtn,
-    handleSigninInput,
-    handleSignupInput,
-    handleUpdateInput,
     isChecked,
     setIsChecked,
+    setIsDisabled,
     isDisabled,
     formHandleChange,
-    formHandleChangeSignup,
-    formHandleChangeUpdate,
-    formHandleChangeSignin,
   };
 }
 export default useForm;

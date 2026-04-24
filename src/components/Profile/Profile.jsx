@@ -12,7 +12,7 @@ function Profile({
 }) {
   return (
     <section className="profile">
-      <SideBar user={user} handleLogOut={handleLogOut} />
+      <SideBar />
       <ClothesSection
         clothingItems={clothingItems}
         handleCardClick={handleCardClick}

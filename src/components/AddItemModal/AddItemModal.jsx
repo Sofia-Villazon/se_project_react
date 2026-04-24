@@ -1,34 +1,51 @@
 import "./AddItemModal.css";
 
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
-import { defaultValues, defaultInputCheck } from "../../utils/constants.js";
+import {
+  defaultClothValues,
+  defaultInputCheck,
+} from "../../utils/constants.js";
 
-function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
+function AddItemModal({
+  isOpen,
+  onAddItem,
+  closeActiveModal,
+  setValues,
+  values,
+}) {
   const {
-    values,
-    setValues,
     handleImage,
     error,
-    handleName,
+    handleInput,
     handleRadioBtn,
     setIsChecked,
     isChecked,
     setIsDisabled,
     isDisabled,
     formHandleChange,
-  } = useForm();
+  } = useForm(defaultClothValues, values);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const hasErrors = Object.values(error).some((e) => e !== "");
     if (!hasErrors) {
       onAddItem(values);
-      setValues(defaultValues);
-      setIsChecked(defaultInputCheck);
-      setIsDisabled(false);
     }
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setValues(defaultClothValues);
+      setIsChecked(defaultInputCheck);
+    }
+  });
+
+  const handleChange = (evt) => {
+    handleInput(evt, setValues);
+  };
+
   return (
     <ModalWithForm
       buttonText="Add garment"
@@ -55,7 +72,7 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
           minLength="2"
           maxLength="40"
           value={values.name}
-          onChange={handleName}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="garment-image-input" className="modal__label">
@@ -71,7 +88,7 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
           placeholder="Image URL"
           required
           value={values.imageUrl}
-          onChange={handleImage}
+          onChange={handleChange}
         />
       </label>
       <fieldset className="modal__fieldset">
@@ -88,8 +105,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
             name="weather"
             required
             value="hot"
-            onChange={handleRadioBtn}
-            checked={isChecked.hot}
+            onChange={(evt) => handleRadioBtn(evt, setValues)}
+            checked={values.weather === "hot"}
           />
           <label htmlFor="type-hot-input" className="modal__label_radio">
             Hot
@@ -104,8 +121,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
             name="weather"
             required
             value="warm"
-            onChange={handleRadioBtn}
-            checked={isChecked.warm}
+            onChange={(evt) => handleRadioBtn(evt, setValues)}
+            checked={values.weather === "warm"}
           />
           <label htmlFor="type-warm-input" className="modal__label_radio">
             Warm
@@ -120,8 +137,8 @@ function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
             name="weather"
             required
             value="cold"
-            onChange={handleRadioBtn}
-            checked={isChecked.cold}
+            onChange={(evt) => handleRadioBtn(evt, setValues)}
+            checked={values.weather === "cold"}
           />
           <label htmlFor="type-cold-input" className="modal__label_radio">
             Cold

@@ -2,14 +2,19 @@ import "./SideBar.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../hooks/contexts/CurrentUserContext";
 
-function SideBar({ user }) {
-  const { handleLogOut, handleUpdateModal } = useContext(CurrentUserContext);
+function SideBar() {
+  const { handleLogOut, handleUpdateModal, userData } =
+    useContext(CurrentUserContext);
 
   return (
     <aside className="side-bar">
       <div className="side-bar__user-container">
-        <img src={user.avatar} alt={user.name} className="side-bar__avatar" />
-        <p className="side-bar__user-name">{user.name}</p>
+        <img
+          src={userData.avatar}
+          alt={userData.username}
+          className="side-bar__avatar"
+        />
+        <p className="side-bar__user-name">{userData.username}</p>
       </div>
       <div className="sider-bar__user-btns">
         <button className="side-bar__btn" onClick={handleUpdateModal}>

@@ -2,20 +2,31 @@ import "./RegisterModal.css";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
+import { defaultRegData } from "../../utils/constants";
 
-function RegisterModal({ isOpen, onSignUp, closeActiveModal, toggleModal }) {
-  const {
-    userData,
-    errorRegistration,
-    handleSignupInput,
-    isDisabled,
-    formHandleChangeSignup,
-  } = useForm();
+import { useEffect } from "react";
+
+function RegisterModal({
+  isOpen,
+  onSignUp,
+  closeActiveModal,
+  toggleModal,
+  setRegisteredData,
+  registeredData,
+}) {
+  const { error, handleInput, isDisabled, formHandleChange } =
+    useForm(defaultRegData);
 
   const onRegistration = (e) => {
     e.preventDefault();
-    onSignUp(userData);
+    onSignUp(registeredData);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      setRegisteredData(defaultRegData);
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -27,13 +38,13 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal, toggleModal }) {
         changeName="or Login"
         onSubmit={onRegistration}
         isDisabled={isDisabled}
-        formHandleChange={formHandleChangeSignup}
+        formHandleChange={formHandleChange}
         toggleModal={toggleModal}
       >
         <label htmlFor="register-email-input" className="modal__label">
           Email*
           <span className="modal__error" id="register-email-input-error">
-            {errorRegistration.email}
+            {error.email}
           </span>
           <input
             id="register-email-input"
@@ -44,14 +55,14 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal, toggleModal }) {
             required
             minLength="2"
             maxLength="40"
-            value={userData.email}
-            onChange={handleSignupInput}
+            value={registeredData.email}
+            onChange={(evt) => handleInput(evt, setRegisteredData)}
           />
         </label>
         <label htmlFor="register-password-input" className="modal__label">
           Password*
           <span className="modal__error" id="register-password-input-error">
-            {errorRegistration.password}
+            {error.password}
           </span>
           <input
             id="register-password-input"
@@ -62,14 +73,14 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal, toggleModal }) {
             minLength="8"
             maxLength="10"
             required
-            value={userData.password}
-            onChange={handleSignupInput}
+            value={registeredData.password}
+            onChange={(evt) => handleInput(evt, setRegisteredData)}
           />
         </label>
         <label htmlFor="register-name-input" className="modal__label">
           Name
           <span className="modal__error" id="register-name-input-error">
-            {errorRegistration.name}
+            {error.name}
           </span>
           <input
             id="register-name-input"
@@ -79,14 +90,14 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal, toggleModal }) {
             placeholder="Name"
             minLength="2"
             maxLength="40"
-            onChange={handleSignupInput}
-            value={userData.name}
+            onChange={(evt) => handleInput(evt, setRegisteredData)}
+            value={registeredData.name}
           />
         </label>
         <label htmlFor="register-avatar-input" className="modal__label">
           Avatar URL
           <span className="modal__error" id="register-avatar-input-error">
-            {errorRegistration.avatar}
+            {error.avatar}
           </span>
           <input
             id="register-avatar-input"
@@ -94,8 +105,8 @@ function RegisterModal({ isOpen, onSignUp, closeActiveModal, toggleModal }) {
             type="url"
             className="modal__input"
             placeholder="Avatar URL"
-            value={userData.avatar}
-            onChange={handleSignupInput}
+            value={registeredData.avatar}
+            onChange={(evt) => handleInput(evt, setRegisteredData)}
           />
         </label>
       </ModalWithForm>

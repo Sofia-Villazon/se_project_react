@@ -31,7 +31,12 @@ import * as auth from "../../utils/auth.js";
 
 import "../../vendor/normalize.css";
 import "./App.css";
-import { defaultCurrentUser } from "../../utils/constants.js";
+import {
+  defaultCurrentUser,
+  defaultRegData,
+  defaultClothValues,
+  defaultLogData,
+} from "../../utils/constants.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -52,6 +57,10 @@ function App() {
     email: "",
     avatar: "",
   });
+  const [registeredData, setRegisteredData] = useState(defaultRegData);
+  const [loginData, setLoginData] = useState(defaultLogData);
+  const [values, setValues] = useState(defaultClothValues);
+
   const [currentUser, setCurrentUser] = useState(defaultCurrentUser);
 
   const navigate = useNavigate();
@@ -155,7 +164,7 @@ function App() {
   const handleRegisterClick = () => {
     setActiveModal("register");
   };
-
+  console.log(activeModal);
   const handleToggleRegisterLogin = () => {
     setActiveModal(activeModal === "register" ? "signin" : "register");
   };
@@ -202,6 +211,7 @@ function App() {
   };
 
   const onAddItem = (newCardData) => {
+    console.log("click");
     addItems(newCardData)
       .then((data) => {
         setClothingItems([...clothingItems, data]);
@@ -300,7 +310,6 @@ function App() {
               activeModal={activeModal}
               closeActiveModal={closeActiveModal}
               weatherData={weatherData}
-              user={userData}
             />
             <Routes>
               <Route
@@ -321,7 +330,6 @@ function App() {
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
-                      user={userData}
                       handleLogOut={handleLogOut}
                     />
                   </ProtectedRoute>
@@ -334,6 +342,8 @@ function App() {
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "add-garment"}
               onAddItem={onAddItem}
+              setValues={setValues}
+              values={values}
             />
             <ItemModal
               deleteHandler={deleteHandler}
@@ -347,17 +357,23 @@ function App() {
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "signin"}
               toggleModal={handleToggleRegisterLogin}
+              loginData={loginData}
+              setLoginData={setLoginData}
             />
             <RegisterModal
               onSignUp={handleSignup}
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "register"}
               toggleModal={handleToggleRegisterLogin}
+              setRegisteredData={setRegisteredData}
+              registeredData={registeredData}
             />
             <UpdateUserModal
               onSubmit={handleUpdateUser}
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "update-user"}
+              setRegisteredData={setRegisteredData}
+              registeredData={registeredData}
             />
             <LogoutModal
               isOpen={activeModal === "log-out"}

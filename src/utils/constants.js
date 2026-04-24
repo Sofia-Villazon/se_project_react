@@ -11,13 +11,13 @@ import snowN from "../assets/night/snow.svg";
 import fogN from "../assets/night/fog.svg";
 import stormN from "../assets/night/storm.svg";
 
-const defaultValues = { name: "", imageUrl: "", weather: "" };
+const defaultClothValues = { name: "", imageUrl: "", weather: "" };
 const defaultInputCheck = {
   hot: false,
   warm: false,
   cold: false,
 };
-const defaultUserR = {
+const defaultRegData = {
   name: "",
   avatar: "",
   email: "",
@@ -37,7 +37,7 @@ const defaultUserU = {
   password: "",
 };
 
-const defaultUserL = {
+const defaultLogData = {
   email: "",
   password: "",
 };
@@ -59,10 +59,10 @@ export {
   apiKey,
   coordinates,
   handleServerResponse,
-  defaultValues,
+  defaultClothValues,
   defaultInputCheck,
-  defaultUserR,
-  defaultUserL,
+  defaultRegData,
+  defaultLogData,
   defaultUserU,
   defaultCurrentUser,
 };

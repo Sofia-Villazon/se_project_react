@@ -8,24 +8,20 @@ import {
   defaultInputCheck,
 } from "../../utils/constants.js";
 
-function AddItemModal({
-  isOpen,
-  onAddItem,
-  closeActiveModal,
-  setValues,
-  values,
-}) {
+function AddItemModal({ isOpen, onAddItem, closeActiveModal }) {
   const {
     handleImage,
     error,
     handleInput,
-    handleRadioBtn,
+    // handleRadioBtn,
     setIsChecked,
     isChecked,
     setIsDisabled,
     isDisabled,
-    formHandleChange,
-  } = useForm(defaultClothValues, values);
+    setValues,
+    values,
+    handleChange,
+  } = useForm(defaultClothValues);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -38,13 +34,8 @@ function AddItemModal({
   useEffect(() => {
     if (!isOpen) {
       setValues(defaultClothValues);
-      setIsChecked(defaultInputCheck);
     }
   });
-
-  const handleChange = (evt) => {
-    handleInput(evt, setValues);
-  };
 
   return (
     <ModalWithForm
@@ -55,7 +46,6 @@ function AddItemModal({
       onSubmit={handleSubmit}
       error={error}
       isDisabled={isDisabled}
-      formHandleChange={formHandleChange}
     >
       <label htmlFor="garment-name-input" className="modal__label">
         Name
@@ -105,7 +95,7 @@ function AddItemModal({
             name="weather"
             required
             value="hot"
-            onChange={(evt) => handleRadioBtn(evt, setValues)}
+            onChange={handleChange}
             checked={values.weather === "hot"}
           />
           <label htmlFor="type-hot-input" className="modal__label_radio">
@@ -121,7 +111,7 @@ function AddItemModal({
             name="weather"
             required
             value="warm"
-            onChange={(evt) => handleRadioBtn(evt, setValues)}
+            onChange={handleChange}
             checked={values.weather === "warm"}
           />
           <label htmlFor="type-warm-input" className="modal__label_radio">
@@ -137,7 +127,7 @@ function AddItemModal({
             name="weather"
             required
             value="cold"
-            onChange={(evt) => handleRadioBtn(evt, setValues)}
+            onChange={handleChange}
             checked={values.weather === "cold"}
           />
           <label htmlFor="type-cold-input" className="modal__label_radio">

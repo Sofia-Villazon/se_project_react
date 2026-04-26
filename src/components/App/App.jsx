@@ -57,9 +57,6 @@ function App() {
     email: "",
     avatar: "",
   });
-  const [registeredData, setRegisteredData] = useState(defaultRegData);
-  const [loginData, setLoginData] = useState(defaultLogData);
-  const [values, setValues] = useState(defaultClothValues);
 
   const [currentUser, setCurrentUser] = useState(defaultCurrentUser);
 
@@ -69,9 +66,7 @@ function App() {
     auth
       .signup(name, avatar, email, password)
       .then((data) => {
-        // signup returns parsed JSON (created user)
         closeActiveModal();
-        // auto-signin using the returned email and the provided password
         return auth.signin(email, password);
       })
       .then((data) => {
@@ -164,7 +159,7 @@ function App() {
   const handleRegisterClick = () => {
     setActiveModal("register");
   };
-  console.log(activeModal);
+
   const handleToggleRegisterLogin = () => {
     setActiveModal(activeModal === "register" ? "signin" : "register");
   };
@@ -214,7 +209,7 @@ function App() {
     console.log("click");
     addItems(newCardData)
       .then((data) => {
-        setClothingItems([...clothingItems, data]);
+        setClothingItems([data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
@@ -240,10 +235,18 @@ function App() {
       }
     };
 
+    const handleOverlay = (e) => {
+      if (e.target.classList.contains("modal")) {
+        closeActiveModal();
+      }
+    };
+
     document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("mousedown", handleOverlay);
 
     return () => {
       document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("mousedown", handleOverlay);
     };
   }, [activeModal]);
 
@@ -342,8 +345,6 @@ function App() {
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "add-garment"}
               onAddItem={onAddItem}
-              setValues={setValues}
-              values={values}
             />
             <ItemModal
               deleteHandler={deleteHandler}
@@ -357,23 +358,17 @@ function App() {
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "signin"}
               toggleModal={handleToggleRegisterLogin}
-              loginData={loginData}
-              setLoginData={setLoginData}
             />
             <RegisterModal
               onSignUp={handleSignup}
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "register"}
               toggleModal={handleToggleRegisterLogin}
-              setRegisteredData={setRegisteredData}
-              registeredData={registeredData}
             />
             <UpdateUserModal
               onSubmit={handleUpdateUser}
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "update-user"}
-              setRegisteredData={setRegisteredData}
-              registeredData={registeredData}
             />
             <LogoutModal
               isOpen={activeModal === "log-out"}

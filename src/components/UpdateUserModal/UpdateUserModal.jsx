@@ -5,25 +5,22 @@ import CurrentUserContext from "../../hooks/contexts/CurrentUserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { defaultRegData } from "../../utils/constants";
 
-function UpdateUserModal({
-  isOpen,
-  closeActiveModal,
-  onSubmit,
-  setRegisteredData,
-  registeredData,
-}) {
+function UpdateUserModal({ isOpen, closeActiveModal, onSubmit }) {
   const { userData } = useContext(CurrentUserContext);
-  const { handleInput, error, isDisabled, formHandleChange } =
+  const { handleInput, error, isDisabled, values, setValues, handleChange } =
     useForm(defaultRegData);
   useEffect(() => {
     if (isOpen) {
-      setRegisteredData(userData);
+      setValues({
+        name: userData.name || "",
+        avatar: userData.avatar || "",
+      });
     }
   }, [isOpen, userData]);
 
   const onUpdateUser = (e) => {
     e.preventDefault();
-    onSubmit({ name: e.target.name.value, avatar: e.target.avatar.value });
+    onSubmit({ name: values.name, avatar: values.avatar });
   };
 
   return (
@@ -35,7 +32,6 @@ function UpdateUserModal({
         closeActiveModal={closeActiveModal}
         onSubmit={onUpdateUser}
         isDisabled={isDisabled}
-        formHandleChange={formHandleChange}
       >
         <label htmlFor="update-user-name-input" className="modal__label">
           Name*
@@ -51,8 +47,8 @@ function UpdateUserModal({
             minLength="2"
             maxLength="40"
             required
-            value={registeredData.name || ""}
-            onChange={(evt) => handleInput(evt, setRegisteredData)}
+            value={values.name || ""}
+            onChange={handleChange}
           />
         </label>
         <label htmlFor="update-user-avatar-input" className="modal__label">
@@ -67,8 +63,8 @@ function UpdateUserModal({
             className="modal__input"
             placeholder="avatar"
             required
-            value={registeredData.avatar || ""}
-            onChange={(evt) => handleInput(evt, setRegisteredData)}
+            value={values.avatar || ""}
+            onChange={handleChange}
           />
         </label>
       </ModalWithForm>

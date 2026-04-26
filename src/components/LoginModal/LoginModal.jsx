@@ -12,17 +12,24 @@ function LoginModal({
   loginData,
   setLoginData,
 }) {
-  const { setUserDataL, handleInput, error, isDisabled, formHandleChange } =
-    useForm(defaultLogData);
+  const {
+    setUserDataL,
+    handleInput,
+    error,
+    isDisabled,
+    values,
+    setValues,
+    handleChange,
+  } = useForm(defaultLogData);
 
   const onLogin = (e) => {
     e.preventDefault();
-    onSignin(loginData);
+    onSignin(values);
   };
 
   useEffect(() => {
     if (isOpen) {
-      setLoginData(defaultLogData);
+      setValues(defaultLogData);
     }
   }, [isOpen]);
 
@@ -36,7 +43,6 @@ function LoginModal({
         changeName="or Register"
         onSubmit={onLogin}
         isDisabled={isDisabled}
-        formHandleChange={formHandleChange}
         toggleModal={toggleModal}
       >
         <label htmlFor="login-email-input" className="modal__label">
@@ -51,8 +57,8 @@ function LoginModal({
             className="modal__input"
             placeholder="Email"
             required
-            value={loginData.email}
-            onChange={(evt) => handleInput(evt, setLoginData)}
+            value={values.email}
+            onChange={handleChange}
           />
         </label>
         <label htmlFor="login-password-input" className="modal__label">
@@ -69,8 +75,8 @@ function LoginModal({
             minLength="8"
             maxLength="10"
             required
-            value={loginData.password}
-            onChange={(evt) => handleInput(evt, setLoginData)}
+            value={values.password}
+            onChange={handleChange}
           />
         </label>
       </ModalWithForm>

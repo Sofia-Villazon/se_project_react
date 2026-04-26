@@ -1,73 +1,44 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { defaultInputCheck, defaultClothValues } from "../utils/constants";
 
-function useForm(defaultValues, values) {
+function useForm(defaultValues) {
   const [error, setError] = useState(defaultValues);
-  const [isChecked, setIsChecked] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
 
-  // Validation
-  const validate = useCallback(
-    (inputValidity, inputName) => {
-      const newErrors = { ...error };
-      if (!inputValidity) {
-        newErrors[inputName] =
-          inputName === "name"
-            ? "Name is required and must be 2-40 characters"
-            : inputName === "password"
-              ? "Password is required and must be 8-10 characters"
-              : inputName === "email"
-                ? "Please provide a valid email adress"
-                : "Please provide a valid URL";
-      } else {
-        newErrors[inputName] = "";
-      }
-      setError(newErrors);
-    },
-    [error]
-  );
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [values, setValues] = useState(defaultValues);
+
+  useEffect(() => {
+    formHandleChange();
+  }, [values, error]);
 
   const handleChange = useCallback(
-    (evt, setFunction) => {
-      const { name, value } = evt.target;
-      setFunction((prevData) => ({
+    (evt) => {
+      const { name, value, validationMessage } = evt.target;
+      setValues((prevData) => ({
         ...prevData,
         [name]: value,
+      }));
+      setError((prevData) => ({
+        ...prevData,
+        [name]: validationMessage,
       }));
     },
     [values]
   );
-  const handleInput = useCallback(
-    (evt, setFunction) => {
-      const input = evt.target;
-      validate(input.validity.valid, evt.target.name);
-      // console.log(error);
-      handleChange(evt, setFunction);
-    },
-    [validate, handleChange]
-  );
-
-  const handleRadioBtn = useCallback(
-    (evt, setFunction) => {
-      handleChange(evt, setFunction);
-      setIsChecked(true);
-    },
-    [handleChange]
-  );
 
   const formHandleChange = useCallback(() => {
+    if (!values) return;
     const noErrors = Object.values(error).every((v) => v === "");
-    console.log(noErrors);
-    // console.log(error);
-    setIsDisabled(!noErrors);
+    const isEmpty = Object.values(values).some((v) => v === "");
+    setIsDisabled(!noErrors || isEmpty);
   }, [error]);
 
   return {
     error,
-    handleInput,
-    handleRadioBtn,
-    isChecked,
-    setIsChecked,
+    handleChange,
+    values,
+    setValues,
+
     setIsDisabled,
     isDisabled,
     formHandleChange,
